@@ -5,7 +5,7 @@
 scfa<-function(cfg,cnt=NA,sorton="chisq",sort.descending=TRUE,
               format.labels=TRUE)
    {
-     if(is.na(cnt)) cnt<-as.vector(rep(1,nrow(cfg)))
+     if(is.na(cnt)[1]) cnt<-as.vector(rep(1,nrow(cfg)))
      if(!is.data.frame(cfg)) cfg<-as.data.frame(cfg)
      if (!is.data.frame(cnt)) cnt<-as.data.frame(cnt) 
      cnt<-unlist(cnt) 
@@ -117,13 +117,13 @@ cfa<-function(cfg,cnts=NA,
        {
          num<-(ni-(ntotal*ep))
          den<-sqrt(ntotal*ep*(1.0-ep))
-         if ((ni*ep)<=10.0) num<-num-0.5 # continuity correction
+         if ((ni[1]*ep[1])<=10.0) num<-num-0.5 # continuity correction
          num/den
        }  
      # The order of the following checks is important
      if (is.null(dim(cfg)))
        stop("cfg is probably part of a matrix! Use cfg[,1:n] rather than cfg[1:n]!") 
-     if (is.na(cnts)) cnts<-rep(1,nrow(cfg))
+     if (is.na(cnts)[1]) cnts<-rep(1,nrow(cfg))
      if (length(cnts)==1 && !is.data.frame(cnts))
        stop("cnts is probably part of a matrix! Use cnts[,n] rather than cnts[n]!")
 

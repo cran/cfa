@@ -19,7 +19,7 @@ Returns NULL.
 }
 
 \references{None - plots have been rarely used with the CFA}
-\author{Stefan Funke <funke@attglobal.net>}
+\author{Stefan Funke <s.funke@t-online.de>}
 
 \note{This function is usually invoked plotting an object returned by 
 \code{hier.cfa}}

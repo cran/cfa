@@ -32,8 +32,8 @@ variables come first.
   \item{order}{Order (number of configuration variables)}
 }
 \references{Lautsch, E., von Weber S. (1995) Methoden und Anwendungen der Konfigurationsfrequenzanalyse 
-     Psychologie und Medizin Beltz Psychologie Verlagsunion}
-\author{Stefan Funke <funke@attglobal.net>}
+     in Psychologie und Medizin, Beltz Psychologie Verlagsunion}
+\author{Stefan Funke <s.funke@t-online.de>}
 
 \note{The p for the test of significance ist provided by the print method}
 

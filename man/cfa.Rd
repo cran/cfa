@@ -77,14 +77,14 @@ cfa(cfg, cnts=NA, sorton="chisq", sort.descending=TRUE, format.labels=TRUE,
      Konfigurationsfrequenzanalyse (KFA) und ihre Anwendung in
      Psychologie und Medizin. Beltz Psychologie Verlagsunion
      
-     Lautsch, E., von Weber S. (1995) Methoden und Anwendungen der Konfigurationsfrequenzanalyse 
+     Lautsch, E., von Weber S. (1995) Methoden und Anwendungen der Konfigurationsfrequenzanalyse in
      Psychologie und Medizin. Beltz Psychologie Verlagsunion
 
      Eye, A. von (1990) Introduction to configural frequency analysis.
      The search for types and anti-types in cross-classification. 
      Cambride 1990
      }
-\author{Stefan Funke <funke@attglobal.net>}
+\author{Stefan Funke <s.funke@t-online.de>}
 \note{There are no hard-coded limits in the program so even large tables can be processed. 
      The output table can be very wide if the levels of factors variables are long  strings so `options(width=..)'
      may need to be adjusted. 

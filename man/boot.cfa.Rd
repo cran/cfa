@@ -19,7 +19,7 @@ boot.cfa(configs, cnts, runs=100, sig.item="sig.z",...)
 
   \item{runs}{Number of samples to be drawn.}
   \item{sig.item}{Indicator of significance in the result table (sig.z,sig.chisq,sig.perli,sig.zl,
-sig.zl.corr). Do not forget so set the proper parameters for the CFA if sig.perli,sig.zl or
+sig.zl.corr). Do not forget to set the proper parameters for the CFA if sig.perli,sig.zl or
 sig.zl.corr are to be used!}
   \item{\dots}{Parameters to be to relayed to the CFA}
 }
@@ -43,9 +43,9 @@ in a CFA with the other half of the data.
 }
 \references{ 
    Lautsch, E., von Weber S. (1995) Methoden und Anwendungen der Konfigurationsfrequenzanalyse 
-   Psychologie und Medizin Beltz Psychologie Verlagsunion
+   Psychologie und Medizin, Beltz Psychologie Verlagsunion
 }
-\author{Stefan Funke <funke@attglobal.net>}
+\author{Stefan Funke <s.funke@t-online.de>}
 
 \note{\code{boot.cfa()} performs many CFAs which are by themselves slow, so the execution can
 be \bold{very} time-consuming, especially if a sufficiently high value for \code{runs} was selected}

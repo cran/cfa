@@ -16,7 +16,7 @@ plot.bcfa(x,...)
   Plots the number of cases considered significant vs. the number of cases considered
   to be a type (n > expected). 
 
-  This is like the other plots in some way of plot of quality versus quantity.
+  This is in some way like other plots of quality versus quantity.
 
   Configurations can be identified by left-clicking on them until the
   right mouse button is pressed. The labels of the configurations selected will be displayed
@@ -27,7 +27,7 @@ Returns a vector of the configurations selected with their name set to the label
 }
 
 \references{None - plots have been rarely used with the CFA}
-\author{Stefan Funke <funke@attglobal.net>}
+\author{Stefan Funke <s.funke@t-online.de>}
 
 \note{This function is usually invoked plotting an object returned by 
 \code{boot.cfa}}

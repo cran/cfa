@@ -21,7 +21,7 @@ scfa(cfg, cnt=NA, sorton="chisq", sort.descending=TRUE, format.labels=TRUE)
   \item{format.labels}{Format the labels of the configuration. This makes to output wider but it will increase the
         readability.}
 }
-\details{ This function is the "engine" \code{cfa()} will use. It does the aggregation, summing up
+\details{ This function is the "engine" \code{cfa()} will use. It does the aggregation, summing up,
 and will calculate chi squared. All tests of significance are left to  \code{cfa()} 
 }
 
@@ -35,16 +35,16 @@ and will calculate chi squared. All tests of significance are left to  \code{cfa
 }
 \references{Krauth J., Lienert G. A. (1973, Reprint 1995) Die
      Konfigurationsfrequenzanalyse (KFA) und ihre Anwendung in
-     Psychologie und Medizin Beltz Psychologie Verlagsunion
+     Psychologie und Medizin, Beltz Psychologie Verlagsunion
      
      Lautsch, E., von Weber S. (1995) Methoden und Anwendungen der Konfigurationsfrequenzanalyse 
-     Psychologie und Medizin Beltz Psychologie Verlagsunion
+     Psychologie und Medizin, Beltz Psychologie Verlagsunion
 
      Eye, A. von (1990) Introduction to configural frequency analysis.
      The search for types and anti-types in cross-classification. 
      Cambride 1990 }
      
-\author{Stefan Funke <funke@attglobal.net>}
+\author{Stefan Funke <s.funke@t-online.de>}
 \note{There are no hard-coded limits in the program so even large tables can be processed. 
      }
 
