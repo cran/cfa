@@ -1,0 +1,11 @@
+	gender	married	children	count1950	count1990
+item1	m	myes	cyes		25		20
+item2	m	myes	cno		7		14
+item3	m	mno	cyes		5		10		
+item4	m	mno	cno		17		19
+item5	f	myes	cyes		30		20
+item6	f	myes	cno		8		15
+item7	f	mno	cyes		7		14		
+item8	f	mno	cno		11		22
+		
+

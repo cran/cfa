@@ -1,0 +1,6 @@
+boot.cfa                 Bootstrap CFA
+cfa                      Analysis of configuration frequencies
+hier.cfa                 Hierachical analysis of configuration
+                         frequencies
+mcfa                     Repeated measures analysis of configuration
+                         frequencies

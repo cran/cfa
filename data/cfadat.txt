@@ -1,0 +1,10 @@
+	gender	married	children	count
+item1	m	myes	cyes		25
+item2	m	myes	cno		7
+item3	m	mno	cyes		5
+item4	m	mno	cno		21
+item5	f	myes	cyes		30
+item6	f	myes	cno		8
+item7	f	mno	cyes		12
+item8	f	mno	cno		15
+
