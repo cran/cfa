@@ -7,7 +7,8 @@ Determines the frequency of all combinations of variable values (their
 configurations) over time or with and without treatment in comparison with their expected frequency and displays them in the order of decreasing chi-squared. In addition, a global chi squared is calculated.
 }
 \usage{
-mcfa(configmatrix, cntmatrix, descending=TRUE, sortonchisq=TRUE, ignore.na=FALSE, verbose=FALSE)
+mcfa(configmatrix, cntmatrix, descending=TRUE, sortonchisq=TRUE,
+     ignore.na=FALSE, verbose=FALSE)
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{
@@ -68,4 +69,4 @@ library(cfa)
 data(cfa2dat)
 mcfa(cfa2dat[1:3],cfa2dat[4:5],verbose=T)
 }
-\keyword{ mcfa}%-- one or more ...
+\keyword{ misc}%-- one or more ...

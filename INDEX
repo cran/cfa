@@ -1,5 +1,8 @@
 boot.cfa                 Bootstrap CFA
+cfa-internal             Internal cfa functions
 cfa                      Analysis of configuration frequencies
+cfa2dat                  Example data for multiple cfa
+cfadat                   Simple cfa test data
 hier.cfa                 Hierachical analysis of configuration
                          frequencies
 mcfa                     Repeated measures analysis of configuration

@@ -1,3 +1,2 @@
-cfadat.txt:	One sample CFA
-cfa2dat.txt:	Two sample CFA
-	
+cfa2dat                  Example data for multiple cfa
+cfadat                   Simple cfa test data

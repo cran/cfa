@@ -691,7 +691,7 @@ boot.cfa<-function(configmatrix,cntvector,runs=100,bonferroni=F,sig.limit=0.05)
              lim<-cntvector[j,1]/n
              rndnums<-runif(cntvector[[j,1]])
              lres<-(rndnums<=lim)
-             inc<-length(cntvector[lres==TRUE])
+             inc<-length(lres[lres==TRUE])
 #            incvector[[j,1]]<-incvector[[j,1]]+inc
              incvector[j]<-incvector[j]+inc
            }
