@@ -1,6 +1,6 @@
 Package: cfa
-Version: 0.6-0
-Date: 2002-02-04
+Version: 0.6-1
+Date: 2002-08-23
 Title: Analysis of configuration frequencies (CFA)
 Author: Stefan Funke <funke@attglobal.net> 
 Maintainer: Stefan Funke <funke@attglobal.net> 

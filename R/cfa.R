@@ -69,7 +69,7 @@ mcfa<-function(cfg,cnts,sorton="chisq",sort.descending=TRUE,
      n<-sum(cnts) 
      colsums<-apply(cnts,1,sum)
      rowsums<-apply(cnts,2,sum) 
-     nsmat<-matrix(data=rep(rowsums,ncol(cnts)),nrow=nrow(cfg),ncol=ncol(cnts),byrow=T)
+     nsmat<-matrix(data=rep(rowsums,ncol(cnts)),nrow=nrow(cfg),ncol=ncol(cnts),byrow=TRUE)
      expected<-colsums*nsmat/n
      chisq<-apply((cnts-expected)^2/expected,1,sum)
      sortidx<-order(chisq)
@@ -88,11 +88,11 @@ cfa<-function(cfg,cnts=NA,
               sort.descending=TRUE,
               format.labels=TRUE,
               casewise.delete.empty=TRUE,
-              binom.test=F,
-              exact.binom.test=F,
+              binom.test=FALSE,
+              exact.binom.test=FALSE,
               exact.binom.limit=10,
-              perli.correct=F,
-              lehmacher=F,
+              perli.correct=FALSE,
+              lehmacher=FALSE,
               lehmacher.corr=TRUE,
               alpha=0.05,
               bonferroni=TRUE
@@ -120,7 +120,7 @@ cfa<-function(cfg,cnts=NA,
          if ((ni*ep)<=10.0) num<-num-0.5 # continuity correction
          num/den
        }  
-# The order of the following checks is important
+     # The order of the following checks is important
      if (is.null(dim(cfg)))
        stop("cfg is probably part of a matrix! Use cfg[,1:n] rather than cfg[1:n]!") 
      if (is.na(cnts)) cnts<-rep(1,nrow(cfg))
@@ -286,7 +286,7 @@ cfa<-function(cfg,cnts=NA,
        pchisqsig<-(p.chisq<(alpha/nz)) 
        totalchisq<-sum(res$chisq,na.rm=TRUE)
        p.total.chisq<-1.0-pchisq(totalchisq,dfcell) 
-# Table
+#      Table
        resdataframe<-data.frame(label=res$labels,
                                 n=res$counts,
                                 expected=res$expected,
@@ -414,7 +414,7 @@ plot.scfa<-function(x,...)
          )
       selected<-identify(unlist(x$table["n"]),unlist(x$table["chisq"]),
          n=nrow(x$table)) 
-     if (length(selected)>0) print(x$table[c(selected),"label",drop=F])
+     if (length(selected)>0) print(x$table[c(selected),"label",drop=FALSE])
    }
 
 
@@ -430,8 +430,8 @@ plot.mcfa<-function(x,...)
          )
       selected<-identify(nsums,unlist(x$table["chisq"]),
          n=nrow(x$table)) 
-     if (length(selected)>0) print(x$table[c(selected),"label",drop=F])
-   }
+     if (length(selected)>0) print(x$table[c(selected),"label",drop=FALSE])
+   }                                                                 
    
 plot.hcfa<-function(x,...)
    { 
@@ -465,7 +465,7 @@ boot.cfa<-function(configs,cnts,runs=100,sig.item="sig.z",...)
              incvector[j]<-incvector[j]+inc
            }
          if (sum(incvector)==0) stop("All counts are zero")
-#        must be sorted on label to prevent re-ordering due to different n or chisq         
+         # must be sorted on label to prevent re-ordering due to different n or chisq         
          res<-cfa(configs,as.data.frame(incvector),sorton="label",...) 
          if (!sig.item %in% colnames(res$table)) stop("invalid sig.item specified!")                                               
          boolres<-unlist(res$table[sig.item])                                              
