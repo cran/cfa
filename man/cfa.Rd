@@ -7,8 +7,8 @@
 \usage{
 cfa(cfg, cnts=NA, sorton="chisq", sort.descending=TRUE, format.labels=TRUE, 
     casewise.delete.empty=TRUE, 
-    binom.test=F, exact.binom.test=F, exact.binom.limit=10, 
-    perli.correct=F, lehmacher=F, lehmacher.corr=TRUE, 
+    binom.test=FALSE, exact.binom.test=FALSE, exact.binom.limit=10, 
+    perli.correct=FALSE, lehmacher=FALSE, lehmacher.corr=TRUE, 
     alpha=0.05, bonferroni=TRUE)
 }
 \arguments{

@@ -6,7 +6,7 @@
   function is not generally called by the user but will be used by \code{cfa()}.
 }
 \usage{
-mcfa(cfg, cnts=NA, sorton="chisq", sort.descending=TRUE, format.labels=TRUE)
+mcfa(cfg, cnts, sorton="chisq", sort.descending=TRUE, format.labels=TRUE)
 }
 \arguments{
   \item{cfg}{Contains the configurations. This can be a dataframe or a matrix. The dataframe can contain numbers,
