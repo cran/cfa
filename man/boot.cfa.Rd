@@ -1,56 +1,68 @@
 \name{boot.cfa}
 \alias{boot.cfa}
-%- Also NEED an `\alias' for EACH other topic documented here.
-\title{ Bootstrap CFA}
-\description{
-Check if the configurations detected are stable. This is done by counting the 
-configurations found to be significant in the CFAs performed.
+\title{Bootstrap-CFA}
+\description{ The bootstrap-CFA tries to replicate the pattern of significant configurations by
+re-sampling. 
 }
 \usage{
-boot.cfa(configmatrix, cntvector, runs=100, bonferroni=F, sig.limit=0.05)
+boot.cfa(configs, cnts, runs=100, sig.item="sig.z",...)
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{
- \item{configmatrix}{ Dataframe with the variables to be analyzed}
- \item{cntvector}{ Vector of counts (1 if the data are not aggregated}
- \item{runs}{ Number of runs and therefore samples to be generated.}
- \item{bonferroni}{ Use Bonferroni-adjustment in determining if the configuration is considered significant}
- \item{sig.limit}{ Limit of p which cause the configuration to be counted as "signifcant"}
+  \item{configs}{ Contains the configurations. This can be a dataframe or a matrix. The dataframe can contain numbers,
+              characters, factors, or booleans. The matrix can consist of numbers, characters or booleans 
+              (factors are implicitely re-converted to numerical levels). There must be >=3 columns.
+            }
+  \item{cnts}{ Contains the counts for the configuration. If it is set to NA, a count of one is assumed for every
+               row. This allows untabulated data to be processed. \code{cnts} must be a vector.
+              }
+
+  \item{runs}{Number of samples to be drawn.}
+  \item{sig.item}{Indicator of significance in the result table (sig.z,sig.chisq,sig.perli,sig.zl,
+sig.zl.corr). Do not forget so set the proper parameters for the CFA if sig.perli,sig.zl or
+sig.zl.corr are to be used!}
+  \item{\dots}{Parameters to be to relayed to the CFA}
 }
 \details{
-  The repeated use of tests of significance is obviously problematic. The result is therfore to be interpreted in a strictly heuristic way.
+ Takes 'runs' samples and does as many CFAs while counting how many times this configuration 
+was  considered to be significant. 
+
+Repeated-measures CFAs (mcfa) are not provided.
+
+This is a heuristic method rather than a strict test of significance since there 
+is no adjustment for multiple testing whatsoever. The advantage  is a more reliable picture
+compared to splitting the original data, doing a CFA, and checking if the configurations re-appear 
+in a CFA with the other half of the data. 
 }
 \value{
- \item{Row names}{Configuration}
- \item{cnt.antitype}{Number of cases where n<expected}
- \item{cnt.type}{Number of cases where n>expected}
- \item{pct.types}{Percentage of cases where n>expected}
- \item{cnt.sig}{Number of cases where the p(z) for the configuration was considered significant}
- \item{pct.cnt.sig}{Percentage of cases where the p(z) for the configuration was considered significant}
- 
-
+  \item{cnt.antitype}{Number of antiypes}
+  \item{cnt.type }{Number of types}
+  \item{pct.types}{Number of types in percent}
+  \item{cnt.sig}{Number of significant results}
+  \item{pct.cnt.sig}{Number of significant results in percent}
 }
-\references{
-Lautsch E., von Weber S. (1995)
-Methoden und Anwendungen der Konfigurationsfrequenzanalyse (KFA)
-Beltz Verlagsunion (1995)
+\references{ 
+   Lautsch, E., von Weber S. (1995) Methoden und Anwendungen der Konfigurationsfrequenzanalyse 
+   Psychologie und Medizin Beltz Psychologie Verlagsunion
 }
 \author{Stefan Funke <funke@attglobal.net>}
 
-\section{WARNING }{The program is implemented in R itself rather than a 
-compiled library and therefore slow. It repeatedly calls \code{cfa}. 
-In addition the number of runs must be high to give a reliable result. 
-The default of 100 is the absolute mininum. So a run of the program under 
-realistic conditions may take from minutes to hours.
-} 
+\note{\code{boot.cfa()} performs many CFAs which are by themselves slow, so the execution can
+be \bold{very} time-consuming, especially if a sufficiently high value for \code{runs} was selected}
 
-\seealso{ \code{\link{cfa}}, \code{\link{hier.cfa}} }
+\seealso{ \code{\link{cfa}}, \code{\link{scfa}}}
 
 
 
 \examples{
-library(cfa)
-data(cfadat)
-boot.cfa(cfadat[c("gender","married","children")],cfadat["count"])
+# library(cfa) if not yet loaded
+# Some random configurations:
+configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
+          c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
+counts<-trunc(runif(250)*10)
+boot.cfa(configs,counts,runs=25) 
 }
-\keyword{misc}%-- one or more ...
+
+\keyword{multivariate}
+\keyword{htest}
+

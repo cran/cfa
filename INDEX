@@ -1,9 +1,14 @@
-boot.cfa                 Bootstrap CFA
-cfa-internal             Internal cfa functions
+boot.cfa                 Bootstrap-CFA
 cfa                      Analysis of configuration frequencies
-cfa2dat                  Example data for multiple cfa
-cfadat                   Simple cfa test data
 hier.cfa                 Hierachical analysis of configuration
                          frequencies
-mcfa                     Repeated measures analysis of configuration
-                         frequencies
+mcfa                     Two or more-sample CFA
+plot.bcfa                Plotting method for a bcfa object
+plot.hcfa                Plotting method for a hcfa object
+plot.mcfa                Plotting method for a mcfa object
+plot.scfa                Plotting method for a scfa object
+print.bcfa               Print an object of the class hcfa
+print.hcfa               Print an object of the class hcfa
+print.mcfa               Print an object of the class mcfa
+print.scfa               Print an object of the class scfa
+scfa                     One sample CFA

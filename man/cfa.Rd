@@ -1,92 +1,121 @@
 \name{cfa}
 \alias{cfa}
-%- Also NEED an `\alias' for EACH other topic documented here.
-\title{Analysis of configuration frequencies}
+\title{ Analysis of configuration frequencies}
 \description{
-Determines the frequency of all combinations of variable values (their 
-configurations) in comparison with their expected frequency calculated from 
-the marginals and displays them in the order of decreasing chi-squared. In addition, a global chi squared is calculated.
+  This is the main function which will call scfa() und mcfa() as required.
 }
 \usage{
-cfa(configmatrix, cntvector, 
-    descending=TRUE, sort.on.chisq=TRUE, sort.on.n=FALSE,ignore.na=FALSE, 
-    binom.test=FALSE, binom.test.limit=10, 
-    bonferroni.p.z=T, bonferroni.alpha=0.05, 
-    lehmacher=F, holm.alpha=0.01, verbose=FALSE)
+cfa(cfg, cnts=NA, sorton="chisq", sort.descending=TRUE, format.labels=TRUE, 
+    casewise.delete.empty=TRUE, 
+    binom.test=F, exact.binom.test=F, exact.binom.limit=10, 
+    perli.correct=F, lehmacher=F, lehmacher.corr=TRUE, 
+    alpha=0.05, bonferroni=TRUE)
 }
-
 \arguments{
- \item{configmatrix}{ Dataframe with the variables to be analyzed}
- \item{cntvector}{ Vector of counts (1 if the data are not aggregated)}
- \item{descending}{ Output in the order of decreasing chi squared}
- \item{sort.on.chisq}{ Sort output on chi squared}
- \item{sort.on.n}{ Sort output on the frequency of the configurations}
- \item{ignore.na}{ Ignore (casewise) missing data in the configurations }
- \item{binom.test}{ Perform binomial test for each configuration}
- \item{binom.test.limit}{ Maximum count (frequency) for which a binomial test 
-is performed}
- \item{bonferroni.p.z}{ Bonferroni-adjust in sig. test for each configuration}
- \item{bonferroni.alpha}{ Alpha to be adjusted }
- \item{lehmacher}{ Perform Lehmacher's test with Holm's correction}
- \item{holm.alpha}{ Alpha to be adjusted according to Holm}
- \item{verbose}{ Long output}
+  \item{cfg}{ Contains the configurations. This can be a dataframe or a matrix. The dataframe can contain numbers,
+              characters, factors, or booleans. The matrix can consist of numbers, characters, or booleans 
+              (factors are implicitely re-converted to numerical levels). There must be >=3 columns.
+            }
+  \item{cnts}{ Contains the counts for the configuration. If it is set to NA, a count of one is assumed for every
+               row. This allows untabulated data to be processed. \code{cnts} can be a vector or a matrix/dataframe with >=2 columns.
+              }
+  \item{sorton}{ Determines the sorting order of the output table. Can be set to \code{chisq}, \code{n}, or \code{label}.}
+  \item{sort.descending}{ Sort in descending order}
+  \item{format.labels}{ Format the labels of the configuration. This makes to output wider but it will increase the
+        readability.}
+  \item{casewise.delete.empty}{ If set to TRUE all configurations containing a NA in any column will be deleted. Otherwise
+        NA is handled as the string "NA" and will appear as a valid configuration.}
+  \item{binom.test}{ Use z approximation for binomial test.}
+  \item{exact.binom.test}{ Do an exact binomial test.}
+  \item{exact.binom.limit}{ Maximum n for which an exact binomial test is performed (n >10 causes p to become inexact).}
+  \item{perli.correct}{ Use Perli's correction for multiple test.}
+  \item{lehmacher}{ Use Lehmacher's correction for multiple test.}
+  \item{lehmacher.corr}{ Use a continuity correction for Lehmacher's correction.}
+  \item{alpha}{Alpha level}
+  \item{bonferroni}{Do Bonferroni adjustment for multiple test (irrelevant for Perli's and Lehmacher's test).}
 }
-\details{Each variable must have at least two different values and may have 
-more (extension of the classical CFA). 
-
-\code{configmatrix} must consist of  at least two variables (columns). 
-Factors and numbers are both accepted (the numbers are internally converted 
-to factors). \code{cntvector} must be numeric.
-
-Counts should be at least = 5 for the chi squared test to be 
-reliable but when using the CFA as a purely heuristic tool counts of 0 are 
-possible. 
-
-A z-approximation is used for the test of significance of 
-configuration frequency.
-
-If the data are not aggregated, i.e., there are several entries with the
-same configuration (the same contents of a row in \code{configmatrix}) 
-the counts of these configurations are added and one entry with the summed 
-up count is generated, replacing the original entries.
+\details{
+  The cfa is used to sift large tables of nominal data. Usually it is used for dichotomous 
+  variables but can be extended to three or more possible values. There should be at least three configuration variables
+  in \code{cfg} - otherwise a simple contigency table would do.
+  All tests of significance are two-sided: They test for both types or antitypes, i.e. if n is significantly larger or
+  smaller than the expected value.
+  The usual caveats for testing contigency tables apply. If a configuration has a n <5 an exact test
+  should be used. As an alternative the least interesting configuration variable can be left out (if
+  it is not essential) which will automatically increase the n for the remaining configurations.
 }
-\value{
-  A list with class \code{"cfa"} contains the tabular results and the overall parameters
-  \item{Row names}{Configuration}
-  \item{n}{Frequency (count) of this configuration}
-  \item{pct}{Relative Frequency (count) of this configuration}
-  \item{expected}{Expected Frequency (count) of this configuration calculated from the marginals}
-  \item{Q}{Coefficient of pronouncedness of the configuration. Varies between 0 and 1}
-  \item{chisq}{Chi squared for the given configuration}
-  \item{z}{z-approximation}
-  \item{p}{p(z)}
-  \item{sig(p(z))}{ 1: significant 0: not significant (limit is Bonferroni-adjusted by default}
-  \item{Overall chi squared}{Overall chi squared for the entire table}
-  \item{p(chi squared) }{p(chi squared) for the entire table }
-  \item{Degrees of freedom }{Degrees of freedom for chi squared test of the entire table}
-  \item{Total n}{Sum of all counts}
+\value{ Some of these elements will only be returned when the corresponding argument
+        in the function call has been set. The relation is obvious due to corresponding names.
+  \item{table}{The cfa output table}
+  \item{table["label"]}{Label for the given configuration}
+  \item{table["n"]}{Observed n for this configuration} 
+  \item{table["expected"]}{Expected n for this configuration} 
+  \item{table["Q"]}{Coefficient of pronouncedness (varies between 0 and 1)} 
+  \item{table["chisq"]}{Chi squared for the given configuration} 
+  \item{table["p.chisq"]}{p for the chi squared test} 
+  \item{table["sig.chisq"]}{Is it significant (will Bonferroni-adjust if argument \code{bonferroni} 
+  is set)} 
+  \item{table["z"]}{z-approximation for chi squared}
+  \item{table["p.z"]}{p of z-test}
+  \item{table["sig.z"]}{Is it significant (will Bonferroni-adjust if argument \code{bonferroni} 
+  is set)?}
+  \item{table["x.perli"]}{Statistic for Perli's test}
+  \item{table["sig.perli"]}{Is it significant (this is designed as a multiple test)?}
+  \item{table["zl"]}{z for Lehmacher's test}
+  \item{table["sig.zl"]}{Is it significant (this is designed as a multiple test)?}  
+  \item{table["zl.corr"]}{z for Lehmacher's test (with continuity correction)}
+  \item{table["sig.zl.corr"]}{Is it significant (this is designed as a multiple test)?}
+  \item{table["p.exact.bin"]}{p for exact binomial test} 
+  \item{summary.stats}{Summary stats for entire table}
+  \item{summary.stats["totalchisq"]}{Total chi squared} 
+  \item{summary.stats["df"]}{Degrees of freedom}
+  \item{summary.stats["p"]}{p for the chi squared test}
+  \item{summary.stats["sum of counts"]}{Sum of all counts}
+  \item{levels}{Levels for each configuration. Should all be 2 for the bivariate case} 
 }
-\references{
-Krauth J., Lienert G. A. (1973, Reprint 1995)
-Die Konfigurationsfrequenzanalyse (KFA) und ihre Anwendung in Psychologie und Medizin
-Beltz Psychologie Verlagsunion
+\references{ Krauth J., Lienert G. A. (1973, Reprint 1995) Die
+     Konfigurationsfrequenzanalyse (KFA) und ihre Anwendung in
+     Psychologie und Medizin. Beltz Psychologie Verlagsunion
+     
+     Lautsch, E., von Weber S. (1995) Methoden und Anwendungen der Konfigurationsfrequenzanalyse 
+     Psychologie und Medizin. Beltz Psychologie Verlagsunion
 
-Eye, A. von (1990)
-Introduction to configural frequency analysis. The search for types and anti-types in cross-classification. 
-Cambride 1990
-}
-\author{ Stefan Funke <funke@attglobal.net>}
-\note{The CFA is very useful a a heuristic tool when large numbers of categorical variables are to be screened because there is only one table of results instead of a multi-dimensional crosstabulation or a large amounts of sub-tables generated from it}
+     Eye, A. von (1990) Introduction to configural frequency analysis.
+     The search for types and anti-types in cross-classification. 
+     Cambride 1990
+     }
+\author{Stefan Funke <funke@attglobal.net>}
+\note{There are no hard-coded limits in the program so even large tables can be processed. 
+     The output table can be very wide if the levels of factors variables are long  strings so `options(width=..)'
+     may need to be adjusted. 
 
-\section{WARNING }{The program is implemented in R itself rather than a compiled library and therefore slow. In most cases the input is a pre-aggregated table and speed is no problem because the \code{configmatrix} is small. There are no hard-coded limits in the program so even large tables can be processed but this will take time and memory. The outout table can be very wide if the levels of the factors variables are long 
-strings so \code{options(width=..)} may need to be adjusted} 
+     The object returned has the class scfa if a one-sample CFA was performed or 
+     the class mcfa if a repeated-measures CFA was performed. \code{cfa()} decides which
+     one is appropriate by looking at \code{cnts}: If it is a vector, it will do a
+     simple CFA. If it is a dataframe or matrix with 2 or more columns, a repeated-measures
+     CFA ist done.
+     }
 
-\seealso{ \code{\link{mcfa}}, \code{\link{hier.cfa}}, \code{\link{boot.cfa}}
-}
+\section{WARNING }{Note than spurious "significant" configurations are likely to appear in very large tables.
+     The results should therefore be replicated before they are accepted as real. \code{boot.cfa} can be helpful to check
+     the results.} 
+
+\seealso{ \code{\link{scfa}}, \code{\link{mcfa}}}
 
 \examples{
-library(cfa)
-data(cfadat)
-cfa(cfadat[c("gender","married","children")],cfadat["count"],verbose=T)
+# library(cfa) if not yet loaded
+# Some random configurations:
+configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
+          c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
+counts<-trunc(runif(250)*10)
+cfa(configs,counts) 
 }
-\keyword{misc}%-- one or more ...
+\keyword{multivariate}
+\keyword{htest}
+
+
+
+
+
+
+

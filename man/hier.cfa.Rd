@@ -1,54 +1,51 @@
 \name{hier.cfa}
 \alias{hier.cfa}
-%- Also NEED an `\alias' for EACH other topic documented here.
 \title{Hierachical analysis of configuration frequencies}
-\description{Recursively eliminates variables to generate subtables which are subjected 
-to a CFA and calculates the overall chi squared.
+\description{Recursively eliminates one variable in the configuration to generate all possible
+sub-tables and performs a global chi-squared-test on them
 }
 \usage{
-hier.cfa(configmatrix, cntvector)
+hier.cfa(configs, cnts)
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{
- \item{configmatrix}{ Dataframe with the variables to be analyzed}
- \item{cntvector}{ Vector of counts (1 if the data are not aggregated)}
+  \item{configs}{ Contains the configurations. This can be a dataframe or a matrix. The dataframe can contain numbers,
+              characters, factors or booleans. The matrix can consist of numbers, characters or booleans 
+              (factors are implicitely re-converted to numerical levels). There must be >=3 columns.
+            }
+  \item{cnts}{ Contains the counts for the configuration. If it is set to NA, a count of one is assumed for every
+               row. This allows untabulated data to be processed. \code{cnts} can be a vector or a matrix/dataframe with >=2 columns.
+              }
 }
-\details{The hierarchical CFA is used to eliminate unnecessary variables. 
-The higher the overall chi squared, the better the information from the 
-original table is preserved. Given a constant number of variables in the 
-subtables, the subtable with the highest chi squared is the "best". 
-Sometimes it makes sense to accept a somewhat lower chi squared if the number 
-of variables is lower because of better interpretability.
+\details{The hierarchical CFA assists in the selection of configuration variables by showing
+which variables contribute the most to the variability. If eliminating a variable does not
+markedly decrease the global chi squared the variable is likely to be redundant, provided there are
+no extraneous reasons for retaining it. 
+
+The output is in decreasing order of chi squared so the most useful combinations of 
+variables come first.
+  
 }
 \value{
-  \item{Row names}{Configuration}
-  \item{Overall chi squared}{Overall chi squared for this subtable}
-  \item{order }{Number of variables used}
-
+  \item{chisq}{Global chi squared}
+  \item{df}{Degrees of freedom for this subtable}
+  \item{order}{Order (number of configuration variables)}
 }
-\references{
-Krauth J., Lienert G. A. (1973, Reprint 1995)
-Die Konfigurationsfrequenzanalyse (KFA) und ihre Anwendung in Psychologie und Medizin
-Beltz Psychologie Verlagsunion
+\references{Lautsch, E., von Weber S. (1995) Methoden und Anwendungen der Konfigurationsfrequenzanalyse 
+     Psychologie und Medizin Beltz Psychologie Verlagsunion}
+\author{Stefan Funke <funke@attglobal.net>}
 
-Eye, A. von (1990)
-Introduction to configural frequency analysis. The search for types and anti-types in cross-classification. 
-Cambride 1990
+\note{The p for the test of significance ist provided by the print method}
+
+\seealso{\code{\link{cfa}}, \code{\link{scfa}}, \code{\link{mcfa}}}
+
+\examples{# library(cfa) if not yet loaded
+# Some random configurations:
+configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
+          c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
+counts<-trunc(runif(250)*10)
+hier.cfa(configs,counts) 
 }
-\author{Stefan Funke <funke@attglobal.net> }
 
-\section{WARNING }{The program is implemented in R itself rather than a 
-library and therefore slow. It repeatedly calls a simplified (and faster) 
-version of \code{cfa}. With increasing number of variables in the 
-configuration the running time will incease expontentially} 
-
-\seealso{ \code{\link{cfa}}, \code{\link{boot.cfa}} }
-
-
-
-\examples{
-library(cfa)
-data(cfadat)
-hier.cfa(cfadat[c("gender","married","children")],cfadat["count"])
-}
-\keyword{misc}%-- one or more ...
+\keyword{multivariate}
+\keyword{htest}
