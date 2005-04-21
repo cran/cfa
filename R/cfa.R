@@ -1,3 +1,5 @@
+# cfa 0.7.2
+
 # Note: If the argument is a dataframe, call as cfa(df[1:3],df[4])
 # if it is a matrix, call as cfa(df[,1:3],df[,4])
 
@@ -385,7 +387,7 @@ print.mcfa<-function(x,...)
       cat("\n\n")
       cat("Summary statistics:\n\n")
       cat("Total Chi squared         = ",x$summary.stats["totalchisq"],"\n") 
-      cat("Total degreed of freedom  = ",x$summary.stats["df"],"\n") 
+      cat("Total degrees of freedom  = ",x$summary.stats["df"],"\n") 
       cat("p                         = ",x$summary.stats["p"],"\n") 
       cat("Sum of counts             = ",x$summary.stats["sum of counts"],"\n")
       cat("\n")
