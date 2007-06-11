@@ -1,11 +1,11 @@
-\name{boot.cfa}
-\alias{boot.cfa}
+\name{bcfa}
+\alias{bcfa}
 \title{Bootstrap-CFA}
 \description{ The bootstrap-CFA tries to replicate the pattern of significant configurations by
 re-sampling. 
 }
 \usage{
-boot.cfa(configs, cnts, runs=100, sig.item="sig.z",...)
+bcfa(configs, cnts, runs=100, sig.item="sig.z",...)
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{
@@ -47,7 +47,7 @@ in a CFA with the other half of the data.
 }
 \author{Stefan Funke <s.funke@t-online.de>}
 
-\note{\code{boot.cfa()} performs many CFAs which are by themselves slow, so the execution can
+\note{\code{bcfa()} performs many CFAs which are by themselves slow, so the execution can
 be \bold{very} time-consuming, especially if a sufficiently high value for \code{runs} was selected}
 
 \seealso{ \code{\link{cfa}}, \code{\link{scfa}}}
@@ -60,7 +60,7 @@ be \bold{very} time-consuming, especially if a sufficiently high value for \code
 configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
           c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
 counts<-trunc(runif(250)*10)
-boot.cfa(configs,counts,runs=25) 
+bcfa(configs,counts,runs=25) 
 }
 
 \keyword{multivariate}

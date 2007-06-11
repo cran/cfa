@@ -30,9 +30,9 @@ Returns a vector of the configurations selected with their name set to the label
 \author{Stefan Funke <s.funke@t-online.de>}
 
 \note{This function is usually invoked plotting an object returned by 
-\code{boot.cfa}}
+\code{bcfa}}
 
-\seealso{ \code{\link{boot.cfa}}}
+\seealso{ \code{\link{bcfa}}}
 
 \examples{
 # library(cfa) if not yet loaded
@@ -40,7 +40,7 @@ Returns a vector of the configurations selected with their name set to the label
 configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
           c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
 counts<-trunc(runif(250)*10)
-plot(boot.cfa(configs,counts,runs=25))
+plot(bcfa(configs,counts,runs=25))
 }
 
 \keyword{multivariate}

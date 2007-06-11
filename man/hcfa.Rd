@@ -1,11 +1,11 @@
-\name{hier.cfa}
-\alias{hier.cfa}
+\name{hcfa}
+\alias{hcfa}
 \title{Hierachical analysis of configuration frequencies}
 \description{Recursively eliminates one variable in the configuration to generate all possible
 sub-tables and performs a global chi-squared-test on them
 }
 \usage{
-hier.cfa(configs, cnts)
+hcfa(configs, cnts)
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{
@@ -41,10 +41,10 @@ variables come first.
 
 \examples{# library(cfa) if not yet loaded
 # Some random configurations:
-configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
-          c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
-counts<-trunc(runif(250)*10)
-hier.cfa(configs,counts) 
+#configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
+#          c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
+#counts<-trunc(runif(250)*10)
+#hcfa(configs,counts) 
 }
 
 \keyword{multivariate}

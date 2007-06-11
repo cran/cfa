@@ -1,4 +1,6 @@
-# cfa 0.7.2
+# cfa 0.8.0
+
+# Original part by Funke
 
 # Note: If the argument is a dataframe, call as cfa(df[1:3],df[4])
 # if it is a matrix, call as cfa(df[,1:3],df[,4])
@@ -304,7 +306,7 @@ cfa<-function(cfg,cnts=NA,
      res
   }
  
-hier.cfa<-function(configs,cnts)
+hcfa<-function(configs,cnts)
    {
       # delete subconfigurations and run CFA for the remaining combination
       perm.cfa<-function(configs,cnts)
@@ -370,7 +372,7 @@ print.scfa<-function(x,...)
       cat("\n\n")
       cat("Summary statistics:\n\n")
       cat("Total Chi squared         = ",x$summary.stats["totalchisq"],"\n") 
-      cat("Total degreed of freedom  = ",x$summary.stats["df"],"\n") 
+      cat("Total degrees of freedom  = ",x$summary.stats["df"],"\n") 
       cat("p                         = ",x$summary.stats["p"],"\n") 
       cat("Sum of counts             = ",x$summary.stats["sum of counts"],"\n")
       cat("\n")
@@ -392,7 +394,7 @@ print.mcfa<-function(x,...)
       cat("Sum of counts             = ",x$summary.stats["sum of counts"],"\n")
       cat("\n")
    }
-   
+
 print.hcfa<-function(x,...)
    {
       cat("\n*** Hierarchical CFA ***\n\n")
@@ -406,7 +408,7 @@ print.hcfa<-function(x,...)
       print(restbl,...)
       restbl
    }
-   
+
 plot.scfa<-function(x,...)
    { 
      plot(unlist(x$table["n"]),unlist(x$table["chisq"]),
@@ -433,8 +435,8 @@ plot.mcfa<-function(x,...)
       selected<-identify(nsums,unlist(x$table["chisq"]),
          n=nrow(x$table)) 
      if (length(selected)>0) print(x$table[c(selected),"label",drop=FALSE])
-   }                                                                 
-   
+   }
+
 plot.hcfa<-function(x,...)
    { 
      dotchart(unlist(x["chisq"]),group=factor(unlist(x["orders"])),
@@ -444,7 +446,7 @@ plot.hcfa<-function(x,...)
              )
    }
 
-boot.cfa<-function(configs,cnts,runs=100,sig.item="sig.z",...)
+bcfa<-function(configs,cnts,runs=100,sig.item="sig.z",...)
    {
        if (is.null(dim(cnts))) 
              {
@@ -467,10 +469,10 @@ boot.cfa<-function(configs,cnts,runs=100,sig.item="sig.z",...)
              incvector[j]<-incvector[j]+inc
            }
          if (sum(incvector)==0) stop("All counts are zero")
-         # must be sorted on label to prevent re-ordering due to different n or chisq         
+         # must be sorted on label to prevent re-ordering due to different n or chisq
          res<-cfa(configs,as.data.frame(incvector),sorton="label",...) 
-         if (!sig.item %in% colnames(res$table)) stop("invalid sig.item specified!")                                               
-         boolres<-unlist(res$table[sig.item])                                              
+         if (!sig.item %in% colnames(res$table)) stop("invalid sig.item specified!")
+         boolres<-unlist(res$table[sig.item])
          if (i==1)
            {
              cnttype<-rep(0,length(res$table[,"n"]))
@@ -496,7 +498,7 @@ boot.cfa<-function(configs,cnts,runs=100,sig.item="sig.z",...)
                         "pct.types",
                         "cnt.sig",
                         "pct.cnt.sig")
-    class(restbl)<-"bcfa"                        
+    class(restbl)<-"bcfa"
     restbl
    } 
    
@@ -517,16 +519,6 @@ plot.bcfa<-function(x,...)
       names(selected)<-row.names(x)[selected]         
      if (length(selected)>0) print(selected)          
    }
-
-
-
-
-
-
-
-
-
-
 
 
 

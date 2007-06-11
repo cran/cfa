@@ -31,14 +31,14 @@ print.hcfa(x,...)
 
 \author{Stefan Funke <s.funke@t-online.de>}
 
-\seealso{ \code{\link{hier.cfa}}}
+\seealso{ \code{\link{hcfa}}}
 
 \examples{
-configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
-          c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
-counts<-trunc(runif(250)*10)
-result<-hier.cfa(configs,counts) 
-print(result)
+#configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
+#          c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
+#counts<-trunc(runif(250)*10)
+#result<-hcfa(configs,counts) 
+#print(result)
 }
 
 \keyword{multivariate}

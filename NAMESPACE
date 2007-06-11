@@ -1,0 +1,26 @@
+import("stats")
+
+export(scfa)
+export(mcfa)
+export(cfa)
+export(hcfa)
+export(bcfa)
+
+export(fCFA)
+export(kvCFA)
+
+S3method(print, scfa)
+S3method(print, mcfa)
+S3method(print, hcfa)
+S3method(print, bcfa)
+S3method(plot, scfa)
+S3method(plot, mcfa)
+S3method(plot, hcfa)
+S3method(plot, bcfa)
+
+S3method(print, fCFA)
+S3method(summary, fCFA)
+S3method(print, kvCFA)
+S3method(summary, kvCFA)
+
+
