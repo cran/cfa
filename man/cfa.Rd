@@ -2,7 +2,7 @@
 \alias{cfa}
 \title{ Analysis of configuration frequencies}
 \description{
-  This is the main function which will call scfa() und mcfa() as required.
+  This is the main function which will call scfa() und mcfa() as required to handle the simple and the multiple cfa.
 }
 \usage{
 cfa(cfg, cnts=NA, sorton="chisq", sort.descending=TRUE, format.labels=TRUE, 

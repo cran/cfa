@@ -2,8 +2,9 @@
 \alias{scfa}
 \title{ One sample CFA}
 \description{
-  Performs a configuration frequency analysis if only one set of counts exists. This
-  function is not generally called by the user but will be used by \code{cfa()}.
+  Performs a configuration frequency analysis if only one set of counts exists. 
+  \emph{This function is not designed to be called directly by the user but will only be used internally by by \code{cfa()}.} Both the simple an the multiple cfa are handled by \code{cfa()}
+
 }
 
 \usage{
@@ -56,7 +57,8 @@ and will calculate chi squared. All tests of significance are left to  \code{cfa
 configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
           c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
 counts<-trunc(runif(250)*10)
-scfa(configs,counts) 
+cfa(configs,counts) 
+# cfa rather than scfa!
 }
 
 \keyword{multivariate}

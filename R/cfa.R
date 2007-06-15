@@ -1,4 +1,4 @@
-# cfa 0.8.0
+# cfa 0.8.1
 
 # Original part by Funke
 
@@ -64,6 +64,7 @@ mcfa<-function(cfg,cnts,sorton="chisq",sort.descending=TRUE,
      configs<-ncol(cfg)
      if (configs<2) stop("At least two configuration variables required!")
      if (ncol(cnts)<2) stop("Only one column of counts - use cfa instead!")
+     if (ncol(cnts)>2)  {options("warn"=-1)}
      if (format.labels==TRUE)
        {
          for (i in 1:configs) levels(cfg[,i])<-format(levels(cfg[,i]))
@@ -84,6 +85,7 @@ mcfa<-function(cfg,cnts,sorton="chisq",sort.descending=TRUE,
                counts=cnts[sortidx,],     
                expected=expected[sortidx,],
                chisq=chisq[sortidx]) 
+     if (ncol(cnts)>2)  {options("warn"=0)}
      reslist 
    }
 
@@ -359,7 +361,7 @@ hcfa<-function(configs,cnts)
       orders<- unlist(lapply(strsplit(names(sorted.chisqs)," "),length)) 
       df<- unlist(lapply(strsplit(names(sorted.dfs)," "),length))
 #     Remove global variables       
-      remove("h.cfa.configs","h.cfa.chisqs","h.cfa.dfs",inherits=TRUE)
+      remove("h.cfa.configs","h.cfa.chisqs","h.cfa.dfs",inherits=TRUE,pos=1)
       res<-list(chisq=sorted.chisqs,df=sorted.dfs,orders=orders)
       class(res)<-"hcfa"
       res

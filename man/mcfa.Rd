@@ -2,8 +2,9 @@
 \alias{mcfa}
 \title{ Two or more-sample CFA}
 \description{
-  Performs an analysis of configuration frequencies if two or more sets of counts exist. This
-  function is not generally called by the user but will be used by \code{cfa()}.
+  Performs an analysis of configuration frequencies for two or more sets of counts. 
+  \emph{This function is not designed to be called directly by the user but will only be used internally by \code{cfa()}.}
+  Both the simple an the multiple cfa are handled by \code{cfa()}
 }
 \usage{
 mcfa(cfg, cnts, sorton="chisq", sort.descending=TRUE, format.labels=TRUE)
@@ -54,7 +55,8 @@ configs<-cbind(c("A","B")[rbinom(250,1,0.3)+1],c("C","D")[rbinom(250,1,0.1)+1],
           c("E","F")[rbinom(250,1,0.3)+1],c("G","H")[rbinom(250,1,0.1)+1])
 counts1<-trunc(runif(250)*10) 
 counts2<-trunc(runif(250)*10)
-mcfa(configs,cbind(counts1,counts2))
+cfa(configs,cbind(counts1,counts2))
+# cfa rather than mcfa!
 }
 
 \keyword{multivariate}
