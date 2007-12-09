@@ -276,7 +276,7 @@ cfa<-function(cfg,cnts=NA,
         factorn<-dim(table(cfg)) 
         if (bivariate==TRUE)
           {
-            df<-(2^configs-1)*(counts-1) # (KL82)
+            df<-(configs-1)*(counts-1) # (KL82)
             dfcell<-1                    # (KL77)
           }
         if (bivariate==FALSE)

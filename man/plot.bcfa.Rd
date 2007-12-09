@@ -4,7 +4,7 @@
 \description{Plots an object of the class \code{bcfa}}
 
 \usage{
-plot.bcfa(x,...)
+\method{plot}{bcfa}(x,...)
 }
 
 \arguments{

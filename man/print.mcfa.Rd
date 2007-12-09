@@ -5,7 +5,7 @@
   Printing method for one of two possible objects returned by  \code{cfa()}
 }
 \usage{
-print.mcfa(x,...)
+\method{print}{mcfa}(x,...)
 }
 \arguments{
   \item{x}{An object of the class mcfa}

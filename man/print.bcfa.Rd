@@ -5,7 +5,7 @@
   Printing method for an object returned by  \code{boot.cfa()}
 }
 \usage{
-print.bcfa(x,...)
+\method{print}{bcfa}(x,...)
 }
 \arguments{
   \item{x}{An object of the class bcfa}

@@ -5,7 +5,7 @@
   Printing method for one of two possible objects returned by  \code{cfa()}
 }
 \usage{
-print.scfa(x,...)
+\method{print}{scfa}(x,...)
 }
 \arguments{
   \item{x}{An object of the class scfa}

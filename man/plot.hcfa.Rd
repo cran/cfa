@@ -5,7 +5,7 @@
 Plots an object of the class \code{hcfa}
 }
 \usage{
-plot.hcfa(x,...)
+\method{plot}{hcfa}(x,...)
 }
 \arguments{
   \item{x}{An object of the class hcfa}

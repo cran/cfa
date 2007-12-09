@@ -5,7 +5,7 @@
   Printing method for an object returned by  \code{hier.cfa()}
 }
 \usage{
-print.hcfa(x,...)
+\method{print}{hcfa}(x,...)
 }
 \arguments{
   \item{x}{An object of the class hcfa}

@@ -4,7 +4,7 @@
 \description{Plots an object of the class \code{scfa}
 }
 \usage{
-plot.scfa(x,...)
+\method{plot}{scfa}(x,...)
 }
 \arguments{
   \item{x}{An object of the class \code{scfa} which is returned by the function 

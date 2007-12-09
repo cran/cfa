@@ -5,7 +5,7 @@
 Plots an object of the class \code{mcfa}
 }
 \usage{
-plot.mcfa(x,...)
+\method{plot}{mcfa}(x,...)
 }
 %- maybe also `usage' for other objects documented here.
 \arguments{

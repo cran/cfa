@@ -13,14 +13,16 @@ The procedures stop when model fit is achieved. Functional CFA (fCFA) uses a res
 criterion, Kieser-Victor CFA (kvCFA) a LR-criterion.
 }
 \usage{
-fCFA(m.i, X, tabdim, alpha = 0.05)
-kvCFA(m.i, X, tabdim, alpha = 0.05)
+fCFA(n.i, X, tabdim, restype = "stdPearson", alpha = 0.05)
+kvCFA(n.i, X, tabdim, alpha = 0.05)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{m.i}{Vector of observed frequencies.}
+  \item{n.i}{Vector of observed frequencies.}
   \item{X}{Design Matrix of the base model.}
   \item{tabdim}{Vector of table dimensions.}
+  \item{restype}{Residual type to be used; \code{"stdPearson"} for standardized Pearson,
+  \code{"Pearson"} for Pearson residuals.}
   \item{alpha}{Significance level.}
 }
 
@@ -32,13 +34,13 @@ kvCFA(m.i, X, tabdim, alpha = 0.05)
   \item{chisq.val}{Chi-squared values for each step.}
   \item{df.val}{Degrees of freedom for each step.}
   \item{p.val}{P-values for each step.}
-  \item{struMat}{Design vectors that blank out cells (strutural part of the model).}
+  \item{struMat}{Design vectors that blank out cells (structural part of the model).}
   
 }
 \references{
 
 von Eye, A., and Mair, P. (2007). A functional approach to configural frequency analysis. 
-Austrian Journal of Statistics, in press.
+Austrian Journal of Statistics, forthcoming.
 
 Kieser, M., and Victor, N. (1999). Configural frequency analysis (CFA) revisited: A new look at an old approach. 
 Biometrical Journal, 41, 967-983. 

@@ -1,8 +1,9 @@
 `kvCFA` <-
-function(m.i, X, tabdim, alpha=0.05)
+function(n.i, X, tabdim, alpha=0.05)
 #freq...vector of observedfrequencies
 #X...full design matrix (with intercept)
 {
+  m.i <- n.i
   fit <- FALSE
   strucmat <- diag(1,length(m.i))                          #starting matrix for removing cells
   i <- -1
