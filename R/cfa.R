@@ -1,4 +1,4 @@
-# cfa 0.8.1
+# cfa 0.8.3
 
 # Original part by Funke
 
@@ -176,8 +176,8 @@ cfa<-function(cfg,cnts=NA,
           }
         if (bivariate==FALSE)
          {
-           
-           df<-prod(res$n.levels)+sum(-res$n.levels)+(configs-1)  # (LW96)
+
+           df<-prod(res$n.levels)-sum(res$n.levels)+(nconfigs-1)  # (LW96, Korrektur Gruener)
            dfcell<-prod(res$n.levels-1)                           # richtig?
          }    
        if (bivariate==TRUE)  
@@ -276,7 +276,7 @@ cfa<-function(cfg,cnts=NA,
         factorn<-dim(table(cfg)) 
         if (bivariate==TRUE)
           {
-            df<-(configs-1)*(counts-1) # (KL82)
+            df<-(2^configs-1)*(counts-1) # (KL82)
             dfcell<-1                    # (KL77)
           }
         if (bivariate==FALSE)

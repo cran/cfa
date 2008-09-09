@@ -1,4 +1,5 @@
-summary.fCFA <- function(object,...)
+`summary.fCFA` <-
+function(object,...)
 {
   devVec <- object$dev.val
   chisqVec <- object$chisq.val
@@ -19,8 +20,10 @@ summary.fCFA <- function(object,...)
   final <- object$resstep[(length(object$resstep)-2):length(object$resstep)]
   cat("Design Matrix:\n")                                           #design matrix
   colnames(final[[1]]) <- NULL
+  rownames(final[[1]]) <- NULL
   print(final[[1]])
   cat("\n Expected frequencies:\n")
   print(round(final[[2]],2))
   cat("\n")
 }
+

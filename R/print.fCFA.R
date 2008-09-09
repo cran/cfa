@@ -1,5 +1,5 @@
-#print method for fCFA
-print.fCFA <- function(x,...)
+`print.fCFA` <-
+function(x,...)
 {
   devVec <- x$dev.val
   chisqVec <- x$chisq.val
@@ -11,6 +11,7 @@ print.fCFA <- function(x,...)
   as.vector(round(chidfVec,2)),as.vector(round(pvalueVec,5)))
   dimnames(final.table)[[2]] <- c("LR","X^2","df","p")
   dimnames(final.table)[[1]] <- paste("Step",0:(dim(final.table)[1]-1))
+  cat("\n")
   cat("Results of fCFA-fit: \n")
   cat("\n")
   print(final.table)
@@ -22,3 +23,4 @@ print.fCFA <- function(x,...)
   print(ex)
   cat("\n")
 }
+

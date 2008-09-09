@@ -1,15 +1,9 @@
-#library("mgcv")
-
-#Functional CFA
-fCFA <- function(n.i, X, tabdim, restype = "stdPearson", alpha = 0.05)
+`fCFA` <-
+function(m.i, X, tabdim, alpha = 0.05)
 {
 
 #tabdim... a vector with table dimensions, e.g., tabdim = c(3,2,3)
-#n.i ... vector with observed frequencies
-#restype ... type of residual ("stdPearson", "Pearson", "Deviance")
-#X...design matrix with intercept
 
-  ok <- match.arg(restype, c("stdPearson","Pearson"))
   #if (alpha.cor == "Bonferroni") alpha <- alpha/length(m.i)
 
   resList <- NULL
@@ -18,44 +12,41 @@ fCFA <- function(n.i, X, tabdim, restype = "stdPearson", alpha = 0.05)
   pvalueVec <- NULL
   strucMat <- NULL
   devVec <- NULL
+  typevec <- NULL
   i <- -1
 
   fit <- FALSE
   startdim <- dim(X)[2]
-  typevec <- NULL
- 
+  res <- "Pearson"
+  #bonf <- length(m.i)
   while (fit==FALSE)
   {
     i <- i+1
-    result <- glm.fit(X,n.i,family=poisson())              #model fit
-    #result <- glm(m.i~X, family = poisson())  
+    result <- glm.fit(X,m.i,family=poisson())              #model fit
     efreq <- result$fitted.values                            #expected frequencies
 
-    if (restype == "Pearson") {
-      stres <- (n.i-efreq)/sqrt(efreq)                     #standardized Pearson residuals
+    if (res == "Pearson") {
+      stres <- (m.i-efreq)/sqrt(efreq)                     #standardized Pearson residuals
       stresa <- abs(stres)                                   #standardized residuals (absolute)
-     # pvec <- 2*(1-pnorm(stresa))
+      pvec <- 1-pnorm(stresa)
     }
-    if (restype == "stdPearson") {                                  #standardized Poisson residuals
-      #design matrix noch den intercept weg!!
-      w.i <- result$weights
-      W <- diag(w.i)
-      Hat <- (sqrt(W))%*%X%*%(solve(t(X)%*%W%*%X))%*%t(X)%*%(sqrt(W))
-      h.i <- diag(Hat)
-      stres <- rep(0,length(h.i))
-      ind <- which(round(h.i,5) != 1)                     #ind: where ofreq != efreq
-      stres[ind] <- (n.i[ind]-efreq[ind])/sqrt(efreq[ind]*(1-h.i[ind]))  #stand. Pearson residual
-      stresa <- abs(stres)
-     # pvec <- 2*(1-pnorm(stresa))
-    }
-    if (restype == "Deviance") {
-      d.i <- 2*n.i*log(n.i/efreq)
-      stres <- sqrt(abs(d.i))*sign(n.i-efreq)
-      stresa <- abs(stres)
-     # pvec <- 2*(1-pnorm(stresa))
-    }
+    ##if (res == "Poisson") {                                  #standardized Poisson residuals
+##      w.i <- result$weights
+##      W <- diag(w.i)
+##      Hat <- (mroot(W))%*%X%*%(solve(t(X)%*%W%*%X))%*%t(X)%*%(mroot(W))
+##      h.i <- diag(Hat)
+##      stres <- (m.i-efreq)/sqrt(efreq*(1-h.i))
+##      stresa <- abs(stres)
+##      pvec <- 1-pnorm(stresa)
+##    }
+##    if (res == "Deviance") {
+##      d.i <- 2*m.i*log(m.i/efreq)
+##      stres <- sqrt(abs(d.i))*sign(m.i-efreq)
+##      stresa <- abs(stres)
+##      pvec <- 1-pnorm(stresa)
+##    }
 
-    chisq <- sum((n.i-efreq)^2/efreq)                      #chi-square value
+    chisq <- sum((m.i-efreq)^2/efreq)                      #chi-square value
     chisqVec <- cbind(chisqVec,chisq)
     devVec <- cbind(devVec,result$deviance)
     chidfVec <- cbind(chidfVec,result$df.residual)
@@ -65,17 +56,16 @@ fCFA <- function(n.i, X, tabdim, restype = "stdPearson", alpha = 0.05)
     rL <- list(paste("Step ",i),X,efreq,c(result$deviance,chisq,result$df.residual,pvalue))
     resList <- c(resList,rL)
     if (pvalue < alpha) {
-      strucvec <- as.integer((stresa==max(stresa)))            #cells to be blanked out
-      print(efreq)
-      if (n.i[strucvec==1] > efreq[strucvec==1]) {
+      strucvec <- as.integer(stresa==max(stresa))            #cells to be blanked out
+      strucMat <- rbind(strucMat,strucvec)
+      X <- cbind(X,strucvec)                                 #new design matrix
+      fit <- FALSE
+      if (m.i[strucvec==1] > efreq[strucvec==1]) {
         typ = "type"
       } else {
         typ = "antitype"
       }
-      typevec <- c(typevec,typ) 
-      strucMat <- rbind(strucMat,strucvec)
-      X <- cbind(X,strucvec)                                 #new design matrix
-      fit <- FALSE
+      typevec <- c(typevec,typ)
     } else {
       fit <- TRUE
     }
@@ -102,9 +92,3 @@ fCFA <- function(n.i, X, tabdim, restype = "stdPearson", alpha = 0.05)
   result
 }
 
-#result:
-#resstep ... results for each fCFA-step
-#dev.val ... deviance values for each step
-#chisq.val ... Chi-square values for each step
-#df.val ... corresponding df
-#p.val... p-values for each step

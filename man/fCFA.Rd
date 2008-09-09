@@ -13,15 +13,16 @@ The procedures stop when model fit is achieved. Functional CFA (fCFA) uses a res
 criterion, Kieser-Victor CFA (kvCFA) a LR-criterion.
 }
 \usage{
-fCFA(n.i, X, tabdim, restype = "stdPearson", alpha = 0.05)
-kvCFA(n.i, X, tabdim, alpha = 0.05)
+fCFA(m.i,  X, tabdim, alpha = 0.05)
+kvCFA(m.i, X, tabdim, alpha = 0.05)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{n.i}{Vector of observed frequencies.}
+  \item{m.i}{Vector of observed frequencies.}
   \item{X}{Design Matrix of the base model.}
   \item{tabdim}{Vector of table dimensions.}
-  \item{restype}{Residual type to be used; \code{"stdPearson"} for standardized Pearson,
+# \item{restype}{Residual type to be used; 
+  \code{"stdPearson"} for standardized Pearson,
   \code{"Pearson"} for Pearson residuals.}
   \item{alpha}{Significance level.}
 }
