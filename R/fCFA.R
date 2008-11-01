@@ -52,9 +52,14 @@ function(m.i, X, tabdim, alpha = 0.05)
     chidfVec <- cbind(chidfVec,result$df.residual)
     pvalue <- 1-pchisq(result$deviance,result$df.residual)                          #pvalue
     pvalueVec <- cbind(pvalueVec,pvalue)
-
-    rL <- list(paste("Step ",i),X,efreq,c(result$deviance,chisq,result$df.residual,pvalue))
+    fitvec <- c(chisq,result$deviance,result$df.residual,pvalue)
+    names(fitvec) <- c("LR","X^2","df","p") 
+    Xdes <- as.matrix(X)
+    colnames(Xdes) <- NULL
+    rownames(Xdes) <- NULL
+    rL <- list(desmat = Xdes, exp.freq = efreq, fitvec = fitvec)
     resList <- c(resList,rL)
+    
     if (pvalue < alpha) {
       strucvec <- as.integer(stresa==max(stresa))            #cells to be blanked out
       strucMat <- rbind(strucMat,strucvec)
@@ -84,9 +89,21 @@ function(m.i, X, tabdim, alpha = 0.05)
   strvec <- apply(namesmat,1,paste,collapse="")
   colnames(strucMat) <- strvec
 
-  result <- list(resstep = resList, dev.val = devVec, chisq.val = chisqVec,
-  df.val = chidfVec, p.val = pvalueVec, struc.mat = strucMat, typevec = typevec)
+ restable <- data.frame(as.vector(devVec), as.vector(chisqVec), as.vector(chidfVec), as.vector(pvalueVec)) 
+  dimnames(restable)[[2]] <- c("LR","X^2","df","p")
+  dimnames(restable)[[1]] <- paste("Step",0:(dim(restable)[1]-1))
+  names(typevec) <- paste("Step",1:length(typevec))
   
+  desmat <- resList[(length(resList)-2):length(resList)][[1]]               #design matrix
+  
+  lcomp <- unique(names(resList))
+  nsteps <- dim(restable)[1]
+  steplab <- paste("step", 1:5, sep = "")
+  names(resList) <- as.vector(t(outer(steplab, lcomp, paste, sep = "")))
+  
+  result <- list(restable = restable, design.mat = desmat,  struc.mat = strucMat, 
+                 typevec = typevec, resstep = resList)
+ 
   class(result) <- "fCFA"
   
   result

@@ -28,20 +28,16 @@ kvCFA(m.i, X, tabdim, alpha = 0.05)
 }
 
 \value{
-  \item{resstep}{Log-linear solution for each step: The first list element indicates the current iteration,
-  the second the design matrix, the third the expected frequencies, the fourth is a vector composed of 
-  the deviance, Chi-squared-value, df, and p-value.}
-  \item{dev.val}{Deviance values for each step.}
-  \item{chisq.val}{Chi-squared values for each step.}
-  \item{df.val}{Degrees of freedom for each step.}
-  \item{p.val}{P-values for each step.}
-  \item{struMat}{Design vectors that blank out cells (structural part of the model).}
-  
+  \item{restable}{Fit results for each step}
+  \item{design.mat}{Final design matrix}
+  \item{struc.mat}{Structural part of the design matrix for each step}
+  \item{typevec}{Type or antitype for each step}
+  \item{resstep}{Design matrix, expected frequency vector, and fit results for each step}  
 }
 \references{
 
-von Eye, A., and Mair, P. (2007). A functional approach to configural frequency analysis. 
-Austrian Journal of Statistics, forthcoming.
+von Eye, A., and Mair, P. (2008). A functional approach to configural frequency analysis. 
+Austrian Journal of Statistics, 37, 161-173.
 
 Kieser, M., and Victor, N. (1999). Configural frequency analysis (CFA) revisited: A new look at an old approach. 
 Biometrical Journal, 41, 967-983. 
