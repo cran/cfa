@@ -85,7 +85,7 @@ function(m.i, X, tabdim, alpha=0.05)
   
   lcomp <- unique(names(resList))
   nsteps <- dim(restable)[1]
-  steplab <- paste("step", 1:5, sep = "")
+  steplab <- paste("step", 1:nsteps, sep = "")
   names(resList) <- as.vector(t(outer(steplab, lcomp, paste, sep = "")))
   
   result <- list(restable = restable, design.mat = desmat,  struc.mat = strucMat, 

@@ -21,9 +21,6 @@ kvCFA(m.i, X, tabdim, alpha = 0.05)
   \item{m.i}{Vector of observed frequencies.}
   \item{X}{Design Matrix of the base model.}
   \item{tabdim}{Vector of table dimensions.}
-# \item{restype}{Residual type to be used; 
-  \code{"stdPearson"} for standardized Pearson,
-  \code{"Pearson"} for Pearson residuals.}
   \item{alpha}{Significance level.}
 }
 
