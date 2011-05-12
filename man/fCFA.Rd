@@ -1,6 +1,7 @@
 \name{fCFA}
-\alias{kvCFA}
+
 \alias{fCFA}
+\alias{kvCFA}
 \alias{print.fCFA}
 \alias{print.kvCFA}
 \alias{summary.fCFA}
@@ -16,7 +17,8 @@ criterion, Kieser-Victor CFA (kvCFA) a LR-criterion.
 fCFA(m.i,  X, tabdim, alpha = 0.05)
 kvCFA(m.i, X, tabdim, alpha = 0.05)
 }
-%- maybe also 'usage' for other objects documented here.
+
+
 \arguments{
   \item{m.i}{Vector of observed frequencies.}
   \item{X}{Design Matrix of the base model.}
