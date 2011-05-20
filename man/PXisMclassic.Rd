@@ -39,7 +39,8 @@ Harloff, Joachim, An efficient algorithm for Lindners test
 \seealso{ \code{\link{cfa}}}
 
 \examples{
-library(multicore) # if not yet loaded
+# Does not work with windows since there is no multicore for it
+if (require (multicore)) {
 
 lk<-4 # number of parameters
 ln<-c(59,57,59,58) # marginal sums of the parameters realized in the configuration to be tested
@@ -55,7 +56,7 @@ pHlargerequalM0<-sum(unlist(mclapply(lm0: min(ln),PXisMclassic,ln,lNt,lk)))
 stoptime<-proc.time()
 list(pHXsmallerequalM0=pHXsmallerequalM0,pHXequalM0=pHXequalM0,pHlargerequalM0=pHlargerequalM0,timed.required=stoptime-starttime)
 # End of the old algorithm
-
+}
 
 }
 

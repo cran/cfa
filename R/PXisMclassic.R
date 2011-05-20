@@ -1,6 +1,4 @@
 
-library(multicore)
-
 H<-function(m,a,b,n){
 if(n>=b) invisible(choose(a,m)*choose(n-a,b-m)/choose(n,b))
 else if(n>=a) invisible(choose(b,m)*choose(n-b,a-m)/choose(n,a))
