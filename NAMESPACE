@@ -9,7 +9,8 @@ export(bcfa)
 export(fCFA)
 export(kvCFA)
 
-export(lcfa)
+export(PXisMclassic)
+export(PXisM)
 
 S3method(print, scfa)
 S3method(print, mcfa)

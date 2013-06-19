@@ -1,4 +1,4 @@
-# cfa 0.8.3
+# cfa 0.9.3 
 
 # Original part by Funke
 
@@ -309,7 +309,10 @@ cfa<-function(cfg,cnts=NA,
   }
  
 hcfa<-function(configs,cnts)
-   {
+   {   
+      h.cfa.configs<-list()
+      h.cfa.chisqs<-vector(mode="numeric") 
+      h.cfa.dfs<-vector(mode="numeric")
       # delete subconfigurations and run CFA for the remaining combination
       perm.cfa<-function(configs,cnts)
        { 
@@ -340,10 +343,7 @@ hcfa<-function(configs,cnts)
        stop("Configs and counts must have the same number of rows")
       if (ncol(configs)<3) 
           stop("Less than three config variables make no sense")
-#     Global variables needed to store results of recursive function perm.cfa
-      h.cfa.configs<<-list()
-      h.cfa.chisqs<<-vector(mode="numeric") 
-      h.cfa.dfs<<-vector(mode="numeric")
+
       res<-perm.cfa(configs,cnts) 
       lbls<-res[[1]]
       chisqs<-res[[2]]
@@ -360,8 +360,6 @@ hcfa<-function(configs,cnts)
       names(sorted.chisqs)<-namevec[-1]
       orders<- unlist(lapply(strsplit(names(sorted.chisqs)," "),length)) 
       df<- unlist(lapply(strsplit(names(sorted.dfs)," "),length))
-#     Remove global variables       
-      remove("h.cfa.configs","h.cfa.chisqs","h.cfa.dfs",inherits=TRUE,pos=1)
       res<-list(chisq=sorted.chisqs,df=sorted.dfs,orders=orders)
       class(res)<-"hcfa"
       res
@@ -441,7 +439,7 @@ plot.mcfa<-function(x,...)
 
 plot.hcfa<-function(x,...)
    { 
-     dotchart(unlist(x["chisq"]),group=factor(unlist(x["orders"])),
+     dotchart(unlist(x["chisq"]),groups=factor(unlist(x["orders"])),
               main="Chi squared by order",
               xlab="item",
               ylab="Chi squared",...
@@ -452,11 +450,13 @@ bcfa<-function(configs,cnts,runs=100,sig.item="sig.z",...)
    {
        if (is.null(dim(cnts))) 
              {
-               incvector<-numeric(len=length(cnts)) 
+#               incvector<-numeric(len=length(cnts))
+                incvector<-numeric(length(cnts)) 
              }
            else 
              { 
-               incvector<-numeric(len=length(cnts[,1]))
+#               incvector<-numeric(len=length(cnts[,1]))
+               incvector<-numeric(length(cnts[,1]))
              }    
       cnts<-unlist(cnts)       
       n<-sum(cnts) 
