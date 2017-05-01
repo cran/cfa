@@ -64,7 +64,7 @@ function(m.i, X, tabdim, alpha=0.05)
   }
   
  # final.table <- data.frame(as.vector(round(devVec,2)),as.vector(round(chisqVec,2)),as.vector(round(chidfVec,2)),as.vector(round(pvalueVec,5)))
- # dimnames(final.table)[[2]] <- c("L","X²","df","p")
+ # dimnames(final.table)[[2]] <- c("L","X2","df","p")
   
   if (is.null(strucMat)) stop("Base model fits! No types/antitypes found!\n",call.=FALSE)
   
@@ -77,7 +77,7 @@ function(m.i, X, tabdim, alpha=0.05)
   
   
   restable <- data.frame(as.vector(devVec), as.vector(chisqVec), as.vector(chidfVec), as.vector(pvalueVec)) 
-  dimnames(restable)[[2]] <- c("LR","X^2","df","p")
+  dimnames(restable)[[2]] <- c("LR","X2","df","p")
   dimnames(restable)[[1]] <- paste("Step",0:(dim(restable)[1]-1))
   names(typevec) <- paste("Step",1:length(typevec))
   

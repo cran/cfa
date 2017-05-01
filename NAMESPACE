@@ -1,4 +1,4 @@
-import("stats")
+import("stats", "graphics")
 
 export(scfa)
 export(mcfa)
